@@ -30,7 +30,7 @@ public class ClothingItem {
     private Set<Size> availableSizes;
     private String brand;
     private ClothingStyle style;
-    private Set<ProductImage> productImage;
+    private Set<ProductImage> productImages;
     private MainCategory mainCategory;
     private ClothingDetails details;
 
