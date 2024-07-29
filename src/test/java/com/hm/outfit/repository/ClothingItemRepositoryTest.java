@@ -67,7 +67,7 @@ public class ClothingItemRepositoryTest {
         repository.save(item);
         Optional<ClothingItem> itemOptional = repository.findById(item.getId());
         assertTrue(itemOptional.isPresent());
-        repository.delete(item);
+//        repository.delete(item);
 
     }
 
