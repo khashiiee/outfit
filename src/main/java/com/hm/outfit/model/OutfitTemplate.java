@@ -17,14 +17,16 @@ public class OutfitTemplate {
     private List<ClothingCategory> optionalCategories;
     private int minItems;
     private int maxItems;
+    private Gender gender;
 
-    public <T> OutfitTemplate(String topAndBottom, String topAndBottomOutfit, List<ClothingCategory> requiredCategories, List<ClothingCategory> optionalCategories, int i, int i1) {
+    public <T> OutfitTemplate(String topAndBottom, String topAndBottomOutfit, List<ClothingCategory> requiredCategories, List<ClothingCategory> optionalCategories, int i, int i1, Gender gender) {
         this.id = topAndBottom;
         this.name = topAndBottomOutfit;
         this.requiredCategories = requiredCategories;
         this.optionalCategories = optionalCategories;
         this.minItems = i;
         this.maxItems = i;
+        this.gender = gender;
     }
 
     public boolean isValidOutfit(List<ClothingItem> items) {

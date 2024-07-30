@@ -21,25 +21,27 @@ public class User {
     private String name;
     private String email;
     private Gender gender;
-    private Size preferredSize;
+//    private Set<Size> preferredSizes;
+
+    private Size preferredSizes;
     private Set<ClothingStyle> preferredStyles;
     private List<String> purchaseHistory;
     private LocalDate birthday;;
 
-    public User(String name, String email, Gender gender, Size preferredSize, LocalDate birthday) {
+    public User(String name, String email, Gender gender, Size preferredSizes, LocalDate birthday) {
         this.name = name;
         this.email = email;
         this.gender = gender;
-        this.preferredSize = preferredSize;
+        this.preferredSizes = preferredSizes;
         this.birthday = birthday;
 
     }
 
-    public User(String name, String email, Gender gender, Size preferredSize,Set<ClothingStyle> preferredStyles, List<String> purchaseHistory, LocalDate birthday) {
+    public User(String name, String email, Gender gender,Size preferredSizes,Set<ClothingStyle> preferredStyles, List<String> purchaseHistory, LocalDate birthday) {
         this.name = name;
         this.email = email;
         this.gender = gender;
-        this.preferredSize = preferredSize;
+        this.preferredSizes = preferredSizes;
         this.preferredStyles = preferredStyles;
         this.purchaseHistory = purchaseHistory;
         this.birthday = birthday;
