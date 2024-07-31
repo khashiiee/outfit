@@ -9,6 +9,7 @@ import com.hm.outfit.util.OutfitRanker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,29 +42,33 @@ public class RecommendationService {
         Event event = eventService.getEventById(request.getEventId());
 
         List<ClothingItem> suitableItems = clothingItemService.getAllClothingItems();
-//                suitableItemsfindBySuitableSeasonsContaining(request.getSeason());
-//        suitableItems = filterItemsByUserPreferences(suitableItems, user);
 
         List<Outfit> generatedOutfits = outfitGenerator.generateOutfits(suitableItems, event, user);
-        List<Outfit> budgetFilteredOutfits = budgetCalculator.filterByBudget(generatedOutfits, request.getBudget());
-        List<OutfitScore> rankedOutfits = outfitRanker.rankOutfits(budgetFilteredOutfits, user, event);
 
-        List<Outfit> recommendedOutfits = selectTopOutfits(rankedOutfits, 5);  // Assuming we want top 5
+        List<OutfitScore> rankedOutfits = outfitRanker.rankOutfits(generatedOutfits, user, event, request.getBudget());
 
-        return new RecommendationResponse(recommendedOutfits, request.getUserId(), request.getEventId());
-    }
+        List<Outfit> recommendedOutfits = selectTopOutfits(rankedOutfits, 10);  // Assuming we want top 5
 
-    private List<ClothingItem> filterItemsByUserPreferences(List<ClothingItem> items, User user) {
-        // Implementation to filter items based on user preferences
-        // This could include filtering by size, preferred styles, etc.
-        return items;  // Placeholder
+        List<Outfit> affordableOutfits = recommendedOutfits.stream()
+                .filter(outfit -> outfit.getTotalCost().compareTo(request.getBudget()) <= 0)
+                .collect(Collectors.toList());
+
+        List<Outfit> expensiveYetGoodOutfits = generatedOutfits.stream()
+                .filter(outfit -> outfit.getTotalCost().compareTo(request.getBudget()) > 0 &&
+                        outfit.getTotalCost().compareTo(request.getBudget().multiply(new BigDecimal(2))) <= 0)
+                .collect(Collectors.toList());
+
+        boolean allExceedBudget = recommendedOutfits.stream()
+                .allMatch(recommendedOutfit -> recommendedOutfit.getTotalCost().compareTo(request.getBudget()) > 0);
+
+
+        return new RecommendationResponse(recommendedOutfits, request.getUserId(), request.getEventId(),allExceedBudget, affordableOutfits, expensiveYetGoodOutfits );
     }
 
     private List<Outfit> selectTopOutfits(List<OutfitScore> rankedOutfits, int count) {
-        // Implementation to select top N outfits from ranked list
         return rankedOutfits.stream()
                 .limit(count)
                 .map(OutfitScore::getOutfit)
-                .collect(Collectors.toList());
+                .toList();  // Using .toList() instead of .collect(Collectors.toList())
     }
 }

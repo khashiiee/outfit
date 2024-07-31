@@ -1,12 +1,14 @@
 package com.hm.outfit.service;
 
 import com.hm.outfit.exception.custom.EventNotFoundException;
+import com.hm.outfit.model.ClothingItem;
 import com.hm.outfit.model.ClothingStyle;
 import com.hm.outfit.model.Event;
 import com.hm.outfit.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,5 +43,12 @@ public class EventService {
 
     public List<Event> getEventsByPreferredStyle(ClothingStyle style) {
         return eventRepository.findByPreferredStyle(style);
+    }
+
+    public List<Event> getAllEvents() {
+        Iterable<Event> eventsIterable = eventRepository.findAll();
+        List<Event> eventsList = new ArrayList<>();
+        eventsIterable.forEach(eventsList::add);
+        return eventsList;
     }
 }
