@@ -1,6 +1,8 @@
 package com.hm.outfit.util;
 
 import com.hm.outfit.model.*;
+import com.hm.outfit.service.OutfitService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -9,7 +11,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class OutfitGenerator {
+
+    @Autowired
+    OutfitService outfitService;
+
     private List<OutfitTemplate> templates;
+
 
     public OutfitGenerator() {
         this.templates = OutfitTemplateExamples.getAllTemplates();
@@ -29,6 +36,8 @@ public class OutfitGenerator {
             allOutfits.addAll(outfitsForTemplate);
         }
         System.out.println("Total outfits generated: " + allOutfits.size());
+
+        outfitService.saveOutfitList(allOutfits);
         return allOutfits;
     }
 
