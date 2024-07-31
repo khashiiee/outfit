@@ -21,6 +21,10 @@ public class Event {
     private Set<Color> suitableColors;
     private ClothingStyle preferredStyle;
     private Season season;
+    private Formality formality;
+
+
+
 
 
 

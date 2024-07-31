@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Setter
@@ -25,8 +26,10 @@ public class User {
 
     private Size preferredSizes;
     private Set<ClothingStyle> preferredStyles;
+    private Set<String> preferredBrands;
     private List<String> purchaseHistory;
     private LocalDate birthday;;
+    private Map<String, OutfitRating> outfitRatings;
 
     public User(String name, String email, Gender gender, Size preferredSizes, LocalDate birthday) {
         this.name = name;

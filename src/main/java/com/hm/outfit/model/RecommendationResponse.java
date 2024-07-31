@@ -15,5 +15,8 @@ public class RecommendationResponse {
     private List<Outfit> recommendedOutfits;
     private String userId;
     private String eventId;
+    private boolean budgetExceeded;
+    private List<Outfit> affordableOutfits;
+    private List<Outfit> expensiveYetGoodOutfits;
 
 }
