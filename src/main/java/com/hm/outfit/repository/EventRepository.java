@@ -14,4 +14,5 @@ public interface EventRepository extends CosmosRepository<Event, String> {
     List<Event> findByName(String name);
     List<Event> findByPreferredStyle(ClothingStyle style);
     List<Event> findBySuitableColorsContaining(Set<Color> colors);
+
 }

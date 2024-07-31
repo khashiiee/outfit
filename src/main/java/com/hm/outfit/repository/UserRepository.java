@@ -14,5 +14,6 @@ public interface UserRepository extends CosmosRepository<User, String> {
     User findByEmail(String email);
     List<User> findByPreferredStylesContaining(ClothingStyle style);
 
+
 }
 
