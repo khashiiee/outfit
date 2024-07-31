@@ -120,58 +120,30 @@ public class OutfitGenerator {
     }
 
     private boolean isSuitableForUser(ClothingItem item, User user) {
-        List<String> categories = new ArrayList<>();
-        categories.add(item.getMainCategory().code());
-        String userAgeCategory = user.getAgeCategory();
-        Boolean isSuitableForUser = false;
+        String itemGender = item.getMainCategory().gender();
+        boolean isKidsItem = itemGender.equals("kids");
+        boolean isUnisexItem = itemGender.equals("unisex");
+        boolean isAdultItem = itemGender.equals("men") || itemGender.equals("ladies");
 
-        // Check if the item is for kids
-        boolean isKidsItem = categories.stream().anyMatch(cat -> cat.contains("kids"));
-        System.out.println("Item " + item.getName());
+        System.out.println("Item " + item.getName() + " is a " + itemGender + " item");
 
-
-        System.out.println("is a kid item: " + isKidsItem);
-
-        // Check if the item is for adults
-        boolean isAdultItem = categories.stream().anyMatch(cat ->
-                cat.contains("ladies") || cat.contains("men") || cat.contains("adult"));
-
-        System.out.println("is an adult item: " + isAdultItem);
-
-
-        // Age suitability check
-        if (isKidsItem && !user.isChild()) {
-            isSuitableForUser = false;
-        }
-
-        if (isAdultItem && user.isChild()) {
-            System.out.println(" clothItem is belong to adult and user is " + user.isChild());
-
-            isSuitableForUser = false;
-        }
-
-        // Gender suitability check (for adult items)
-        if (isAdultItem) {
-            if ((categories.stream().anyMatch(cat -> cat.contains("men"))) && user.getGender() == Gender.MALE) {
-                isSuitableForUser = true;
+        if (user.isChild()) {
+            return isKidsItem || isUnisexItem;
+        } else {
+            if (user.getGender() == Gender.FEMALE) {
+                return itemGender.equals("ladies") || isUnisexItem;
+            } else {
+                return itemGender.equals("men") || isUnisexItem;
             }
-            if( (categories.stream().anyMatch(cat -> cat.contains("ladies"))) && user.getGender() == Gender.FEMALE){
-                isSuitableForUser = true;
-            };
         }
-        // If we've passed all checks, the item is suitable
-
-        System.out.println("Finally : check age and gender : is suitable for user : " + isSuitableForUser);
-
-        return isSuitableForUser;
     }
 
     private boolean isStyleSuitable(ClothingItem item, Event event) {
-        boolean suitable = item.getStyle() == event.getPreferredStyle();
+        boolean suitable = item.getStyle() == event.getPreferredStyle()
+                || (event.getPreferredStyle() == ClothingStyle.FORMAL && item.getStyle() == ClothingStyle.BUSINESS);
         System.out.println("Checking style suitability for " + item.getName() + ": " + suitable);
         return suitable;
     }
-
 
     private Outfit createOutfit(List<ClothingItem> items, OutfitTemplate template) {
         BigDecimal totalCost = calculateTotalCost(items);
@@ -188,29 +160,22 @@ public class OutfitGenerator {
     }
 
     private String generateOutfitId() {
-        // Implement a method to generate a unique ID for the outfit
-        // This could be a UUID, a timestamp-based ID, or any other unique identifier
         return UUID.randomUUID().toString();
     }
 
     private Season determineSeason(List<ClothingItem> items) {
-        // This is a simplified version. You might want to implement more sophisticated logic.
         return items.stream()
                 .flatMap(item -> item.getSuitableSeasons().stream())
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
-                .orElse(Season.ALL); // Default to ALL if no clear season is determined
+                .orElse(Season.ALL);
     }
-
 
     private BigDecimal calculateTotalCost(List<ClothingItem> items) {
         return items.stream()
                 .map(ClothingItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-
-
-
 }
