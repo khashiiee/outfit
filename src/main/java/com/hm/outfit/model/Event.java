@@ -20,6 +20,7 @@ public class Event {
     private String name;
     private Set<Color> suitableColors;
     private ClothingStyle preferredStyle;
+    private Season season;
 
 
 
