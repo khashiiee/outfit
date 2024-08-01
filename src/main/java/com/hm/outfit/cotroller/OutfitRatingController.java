@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -22,14 +24,24 @@ public class OutfitRatingController {
     private OutfitRatingService outfitRatingService;
 
     @PostMapping("/rate")
-    public ResponseEntity<String> rateOutfit(@Valid @RequestBody OutfitRatingRequest request) {
+    public ResponseEntity<Map<String, String>> rateOutfit(@Valid @RequestBody OutfitRatingRequest request) {
         try {
             outfitRatingService.rateOutfit(request.getUserId(), request.getOutfitId(), request.getRating());
-            return ResponseEntity.ok("Outfit rated successfully");
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("status", "OK");
+            responseBody.put("message", "The request was successful.");
+
+            return ResponseEntity.ok(responseBody);
         } catch (UserNotFoundException | OutfitNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            Map<String, String> errorBody = new HashMap<>();
+            errorBody.put("status", "ERROR");
+            errorBody.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while rating the outfit");
+            Map<String, String> errorBody = new HashMap<>();
+            errorBody.put("status", "ERROR");
+            errorBody.put("message", "An error occurred while rating the outfit");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
         }
     }
 }
