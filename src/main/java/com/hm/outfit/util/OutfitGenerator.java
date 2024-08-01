@@ -118,7 +118,7 @@ public class OutfitGenerator {
         return items.stream()
                 .filter(item -> isSuitableCategory(item, category))
                 .filter(item -> isSuitableForUser(item, user))
-                .filter(item -> item.getAvailableSizes().contains(user.getPreferredSizes()))
+                .filter(item -> item.getAvailableSizes().contains(user.getPreferredSizes()) || item.getAvailableSizes().contains(Size.ONESIZE))
                 .filter(item -> isStyleSuitable(item, event))
                 .collect(Collectors.toList());
     }

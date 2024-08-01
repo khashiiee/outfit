@@ -16,7 +16,7 @@ import java.util.Set;
 public interface ClothingItemRepository  extends CosmosRepository<ClothingItem, String> {
     List<ClothingItem> findByClothingCategory(ClothingCategory category);
     List<ClothingItem> findByClothingCategoryAndAvailableSizesIn(ClothingCategory clothingCategory, Collection<Set<Size>> availableSizes);
-//    List<ClothingItem> findByColorsIn(Set<String> colors);
+    //    List<ClothingItem> findByColorsIn(Set<String> colors);
     List<ClothingItem> findBySuitableSeasonsContaining(Season season);
     List<ClothingItem> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 //    Iterable<ClothingItem> findAll();
