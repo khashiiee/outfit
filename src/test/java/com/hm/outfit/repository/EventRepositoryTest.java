@@ -24,8 +24,10 @@ public class EventRepositoryTest {
         event.setId("event1");
         event.setName("Birthday Party");
         event.setPreferredStyle(ClothingStyle.CASUAL);
-        Set<Color> colors = Set.of(new Color("#FFFFFF", "White", "WHITE"));
-        event.setSuitableColors(colors);
+        Set<Color> suitableColors = Set.of(new Color("#FFFFFF", "White", "WHITE"));
+        event.setSuitableColors(suitableColors);
+        eventRepository.save(event);
+
         eventRepository.save(event);
 
         Optional<Event> eventOptional = eventRepository.findById("event1");
