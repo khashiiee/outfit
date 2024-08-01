@@ -41,7 +41,11 @@ public class RecommendationService {
         User user = userService.getUserById(request.getUserId());
         Event event = eventService.getEventById(request.getEventId());
 
-        List<ClothingItem> suitableItems = clothingItemService.getAllClothingItems();
+        Season targetSeason = request.getSeason(); // Replace with the desired season
+
+        List<ClothingItem> suitableItems = clothingItemService.getAllClothingItems().stream()
+                .filter(item -> item.getSuitableSeasons().contains(targetSeason))
+                .collect(Collectors.toList());
 
         List<Outfit> generatedOutfits = outfitGenerator.generateOutfits(suitableItems, event, user);
 
