@@ -10,8 +10,19 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-# Set the entrypoint to run the Spring Boot application with the specified JVM arguments
-ENTRYPOINT ["sh", "-c", "java --add-opens java.base/java.math=ALL-UNNAMED -jar app.jar"]
+# Create a script to handle environment variables
+RUN echo '#!/bin/sh\n\
+sed -i "s|#{COSMOS_DB_ENDPOINT}#|$COSMOS_DB_ENDPOINT|g" /app/application.properties\n\
+sed -i "s|#{COSMOS_DB_KEY}#|$COSMOS_DB_KEY|g" /app/application.properties\n\
+sed -i "s|#{COSMOS_DB_DATABASE}#|$COSMOS_DB_DATABASE|g" /app/application.properties\n\
+java --add-opens java.base/java.math=ALL-UNNAMED -jar app.jar\n'\
+> /app/run.sh && chmod +x /app/run.sh
+
+# Copy the application.properties file
+COPY src/main/resources/application.properties /app/application.properties
+
+# Set the entrypoint to our new script
+ENTRYPOINT ["/app/run.sh"]
 
 # Expose the port your application runs on
 EXPOSE 8080
