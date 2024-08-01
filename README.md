@@ -125,7 +125,7 @@ Generates outfit recommendations based on user input.
 1. Clone the repository: `git clone https://github.com/khashiiee/outfit.git`
 2. Navigate to the project directory: `cd outfit`
 3. Build the project:  `mvn clean install` 
-4. Run the application: `mvn spring-boot:run -Dspring-boot.run.jvmArguments="--add-opens java.base/java.math=ALL-UNNAMED"` 
+4. Run the application: `mvn spring-boot:run -Dspring-boot.run.jvmArguments="--add-opens java.base/java.math=ALL-UNNAMED -DCOSMOS_DB_ENDPOINT=your_cosmos_db_endpoint -DCOSMOS_DB_KEY=your_cosmos_db_key -DCOSMOS_DB_DATABASE=your_cosmos_db_database_name"` 
 
 ## Note
 The `--add-opens java.base/java.math=ALL-UNNAMED` argument is required to allow the application to access certain JDK internal APIs.
