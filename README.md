@@ -87,16 +87,18 @@ Explanation of key differences between proposed and implemented ERDs:
 Generates outfit recommendations based on user input.
 
 #### Request Body:
-```json
+```jsonc
 {
   "userId": "string",
   "eventId": "string",
-  "budget": "number"
+  "budget": "number",
+  "season": "enum"   //  SPRING, SUMMER, AUTUMN, ALL, WINTER
+
 }
 ```
 
 #### Response Body:
-```json
+```jsonc
 {
   "recommendedOutfits": [
     {
@@ -157,4 +159,5 @@ If you encounter any issues related to Java modules or accessing internal APIs, 
 - Implement machine learning algorithms or get the use of external service to score the outfits for better recommendations.
 - Add support for seasonal trends.
 - Add more outfit templates.
+- Add support for JWT authentication instead of basic auth.
 
