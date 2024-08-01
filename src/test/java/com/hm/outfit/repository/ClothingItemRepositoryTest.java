@@ -164,8 +164,8 @@ public class ClothingItemRepositoryTest {
         dress.setStyle(ClothingStyle.CASUAL);
 
         Set<ProductImage> productImages1 = Set.of(
-                new ProductImage(1, "9f6a4a2f93ef8bc268a1e8c77ed77aa33111aa05.jpg", "https://i.postimg.cc/JnMrfjxK/Capture-2024-07-31-231306.png", "PRODUCT"),
-                new ProductImage(2, "960dd87b1757a887f4b67b7df595250add6d70bc.jpg", "https://i.postimg.cc/QtcQydR3/Capture-2024-07-31-225219.png", "PRODUCT_WITH_MODEL")
+                new ProductImage(1, "9f6a4a2f93ef8bc268a1e8c77ed77aa33111aa05.jpg", "https://i.postimg.cc/C1kn2RB4/Capture-2024-07-31-231306.png", "PRODUCT"),
+                new ProductImage(2, "960dd87b1757a887f4b67b7df595250add6d70bc.jpg", "https://i.postimg.cc/C1kn2RB4/Capture-2024-07-31-231306.png", "PRODUCT_WITH_MODEL")
         );
         dress.setProductImages(productImages1);
 
@@ -505,7 +505,188 @@ public class ClothingItemRepositoryTest {
         );
         loafers.setDetails(loaferDetails);
 
-        List<ClothingItem> items = Arrays.asList(ladiesTshirt, denimDress, dress, tshirt, jeans, poloShirt,hoodie,jacket,loafers);
+        ClothingItem redDress = new ClothingItem();
+        redDress.setId("1121839009");
+        redDress.setName("Red Cutout Maxi Dress");
+        redDress.setPrice(new BigDecimal("89.99"));
+        redDress.setInStock(true);
+
+        Set<Color> dressColors = Set.of(new Color("#FF0000", "Red", "RED"));
+        redDress.setColors(dressColors);
+
+        Set<Season> dressSeasons = Set.of(Season.SPRING, Season.AUTUMN, Season.WINTER);
+        redDress.setSuitableSeasons(dressSeasons);
+
+        redDress.setClothingCategory(ClothingCategory.DRESS);
+
+        Set<Size> dressSizes = Set.of(Size.XS, Size.S, Size.M, Size.L, Size.XL);
+        redDress.setAvailableSizes(dressSizes);
+
+        redDress.setBrand("& Other Stories");
+        redDress.setStyle(ClothingStyle.CASUAL);
+
+        Set<ProductImage> dressImages = Set.of(
+                new ProductImage(1, "red_dress_product.png", "https://i.postimg.cc/02qqYb0C/Capture-2024-08-01-182940.png", "PRODUCT"),
+                new ProductImage(2, "red_dress_model.png", "https://i.postimg.cc/02qqYb0C/Capture-2024-08-01-182940.png", "PRODUCT_WITH_MODEL")
+        );
+        redDress.setProductImages(dressImages);
+
+        MainCategory dressCategory = new MainCategory(
+                "women_dresses_maxidresses",
+                Set.of("women", "dresses", "maxidresses", "evening"),
+                "women",
+                "dresses",
+                "maxidresses"
+        );
+        redDress.setMainCategory(dressCategory);
+
+        ClothingDetails dressDetails = new ClothingDetails(
+                "Solid color",
+                "Bodycon fit",
+                "Long sleeve",
+                "High neck with cutout",
+                "Maxi length",
+                "Stretchy jersey fabric"
+        );
+        redDress.setDetails(dressDetails);
+
+        ClothingItem Bomberjacket = new ClothingItem();
+        Bomberjacket.setId("1121839010"); // Assuming this is a unique ID
+        Bomberjacket.setName("Oversized Beige Bomber Jacket");
+        Bomberjacket.setPrice(new BigDecimal("79.99")); // Price is an estimate, as it's not visible in the image
+        Bomberjacket.setInStock(true);
+
+        Set<Color> jacketColors1 = Set.of(new Color("#D2B48C", "Beige", "BEIGE"));
+        Bomberjacket.setColors(jacketColors1);
+
+        Set<Season> jacketSeasons1 = Set.of(Season.AUTUMN, Season.SPRING, Season.WINTER);
+        Bomberjacket.setSuitableSeasons(jacketSeasons);
+
+        Bomberjacket.setClothingCategory(ClothingCategory.OUTERWEAR);
+
+        Bomberjacket.setAvailableSizes(jacketSizes);
+
+        Bomberjacket.setBrand("H&M"); // Assuming based on the style, but this should be verified
+        Bomberjacket.setStyle(ClothingStyle.CASUAL);
+
+        Set<ProductImage> jacketImages1 = Set.of(
+                new ProductImage(1, "beige_bomber_jacket.png", "https://i.postimg.cc/SK0yvDWw/Capture-2024-08-01-191253.png", "PRODUCT")
+        );
+        Bomberjacket.setProductImages(jacketImages1);
+
+        MainCategory jacketCategory1 = new MainCategory(
+                "women_jackets_bomber",
+                Set.of("women", "jackets", "bomber", "casual"),
+                "women",
+                "jackets",
+                "bomber"
+        );
+        Bomberjacket.setMainCategory(jacketCategory1);
+
+        ClothingDetails jacketDetails1 = new ClothingDetails(
+                "Solid color",
+                "Oversized fit",
+                "Long sleeve",
+                "Ribbed collar, cuffs, and hem",
+                "Front zip closure",
+                "Lightweight padded fabric"
+        );
+        Bomberjacket.setDetails(jacketDetails1);
+
+        ClothingItem floralDress = new ClothingItem();
+        floralDress.setId("1121839011"); // Assuming this is a unique ID
+        floralDress.setName("Floral Print Smocked Maxi Dress");
+        floralDress.setPrice(new BigDecimal("69.99")); // Price is an estimate, as it's not visible in the image
+        floralDress.setInStock(true);
+
+        Set<Color> floralDressColors = Set.of(
+                new Color("#FFFFF0", "Ivory", "IVORY"),
+                new Color("#FF69B4", "Pink", "PINK"),
+                new Color("#FFD700", "Gold", "GOLD"),
+                new Color("#FFFFFF", "White", "WHITE")
+        );
+        floralDress.setColors(floralDressColors);
+
+        Set<Season> floralDressSeasons = Set.of(Season.SPRING, Season.SUMMER);
+        floralDress.setSuitableSeasons(floralDressSeasons);
+
+        floralDress.setClothingCategory(ClothingCategory.DRESS);
+
+        Set<Size> floralDressSizes = Set.of(Size.XS, Size.S, Size.M, Size.L, Size.XL);
+        floralDress.setAvailableSizes(floralDressSizes);
+
+        floralDress.setBrand("H&M"); // Assuming based on the style, but this should be verified
+        floralDress.setStyle(ClothingStyle.CASUAL);
+
+        Set<ProductImage> floralDressImages = Set.of(
+                new ProductImage(1, "floral_maxi_dress.png", "https://i.postimg.cc/1zgvfr25/Capture-2024-08-01-192349.png", "PRODUCT")
+        );
+        floralDress.setProductImages(floralDressImages);
+
+        MainCategory floralDressCategory = new MainCategory(
+                "women_dresses_maxidresses",
+                Set.of("women", "dresses", "maxidresses", "floral", "summer"),
+                "women",
+                "dresses",
+                "maxidresses"
+        );
+        floralDress.setMainCategory(floralDressCategory);
+
+        ClothingDetails floralDressDetails = new ClothingDetails(
+                "Floral print",
+                "Maxi length",
+                "Short puff sleeves",
+                "Square neckline",
+                "Smocked bodice",
+                "Lightweight fabric"
+        );
+        floralDress.setDetails(floralDressDetails);
+
+        ClothingItem handbag = new ClothingItem();
+        handbag.setId("1121839012"); // Assuming this is a unique ID
+        handbag.setName("White Ruched Shoulder Bag with Ruffled Strap");
+        handbag.setPrice(new BigDecimal("39.99")); // Price is an estimate, as it's not visible in the image
+        handbag.setInStock(true);
+
+        Set<Color> handbagColors = Set.of(new Color("#FFFFFF", "White", "WHITE"));
+        handbag.setColors(handbagColors);
+
+        Set<Season> handbagSeasons = Set.of(Season.SPRING, Season.SUMMER);
+        handbag.setSuitableSeasons(handbagSeasons);
+
+        handbag.setClothingCategory(ClothingCategory.ACCESSORIES);
+
+        Set<Size> handbagSizes = Set.of(Size.ONESIZE);
+        handbag.setAvailableSizes(handbagSizes);
+
+        handbag.setBrand("H&M"); // Assuming based on the style, but this should be verified
+        handbag.setStyle(ClothingStyle.CASUAL);
+
+        Set<ProductImage> handbagImages = Set.of(
+                new ProductImage(1, "white_ruched_handbag.png", "https://i.postimg.cc/sfnGNC1q/Capture-2024-08-01-193032.png", "PRODUCT")
+        );
+        handbag.setProductImages(handbagImages);
+
+        MainCategory handbagCategory = new MainCategory(
+                "women_accessories_bags",
+                Set.of("women", "accessories", "bags", "shoulder_bags"),
+                "women",
+                "accessories",
+                "bags"
+        );
+        handbag.setMainCategory(handbagCategory);
+
+        ClothingDetails handbagDetails = new ClothingDetails(
+                "Solid color",
+                "Ruched design",
+                "Ruffled shoulder strap",
+                "Crescent shape",
+                "Zip closure",
+                "Satin-like fabric"
+        );
+        handbag.setDetails(handbagDetails);
+
+        List<ClothingItem> items = Arrays.asList(ladiesTshirt, denimDress, dress, tshirt, jeans, poloShirt,hoodie,jacket,loafers,redDress,Bomberjacket, floralDress,handbag);
 
         repository.saveAll(items);
     }
