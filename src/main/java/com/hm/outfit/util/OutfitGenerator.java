@@ -38,8 +38,11 @@ public class OutfitGenerator {
         }
         System.out.println("Total outfits generated: " + allOutfits.size());
 
-        outfitService.saveOutfitList(allOutfits);
-        return allOutfits;
+        List<Outfit> uniqueOutfits = removeOutfitsWithSameClothes(allOutfits);
+        System.out.println("Number of unique outfits: " + uniqueOutfits.size());
+
+        outfitService.saveOutfitList(uniqueOutfits);
+        return uniqueOutfits;
     }
 
     private List<Outfit> generateOutfits(List<ClothingItem> items, Event event, User user, OutfitTemplate template) {
@@ -187,5 +190,16 @@ public class OutfitGenerator {
         return items.stream()
                 .map(ClothingItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private List<Outfit> removeOutfitsWithSameClothes(List<Outfit> outfits) {
+        Map<Set<ClothingItem>, Outfit> uniqueOutfitsMap = new HashMap<>();
+
+        for (Outfit outfit : outfits) {
+            Set<ClothingItem> clothingSet = new HashSet<>(outfit.getItems());
+            uniqueOutfitsMap.putIfAbsent(clothingSet, outfit);
+        }
+
+        return new ArrayList<>(uniqueOutfitsMap.values());
     }
 }
