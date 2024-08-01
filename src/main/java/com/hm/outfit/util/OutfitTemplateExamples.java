@@ -17,6 +17,14 @@ public class OutfitTemplateExamples {
             2, 5, Gender.FEMALE
     );
 
+    public static final OutfitTemplate JUST_DRESS = new OutfitTemplate(
+            "DRESS_BASED",
+            "Dress-based Outfit",
+            Arrays.asList(ClothingCategory.DRESS),
+            Arrays.asList(ClothingCategory.ACCESSORY,  ClothingCategory.OUTERWEAR),
+            1, 5, Gender.FEMALE
+    );
+
     public static final OutfitTemplate TOP_AND_BOTTOM_LADIES = new OutfitTemplate(
             "TOP_AND_BOTTOM",
             "Top and Bottom Outfit",
@@ -75,6 +83,6 @@ public class OutfitTemplateExamples {
     );
 
     public static List<OutfitTemplate> getAllTemplates() {
-        return Arrays.asList(DRESS_BASED, TOP_AND_BOTTOM_LADIES, TOP_AND_BOTTOM_MALE, FORMAL_SUIT_MALE,CASUAL_SUMMER_FEMALE,CASUAL_SUMMER_FEMALE_2, CASUAL_SUMMER_MALE,CASUAL_SPRING_MALE);
+        return Arrays.asList(DRESS_BASED, TOP_AND_BOTTOM_LADIES, TOP_AND_BOTTOM_MALE, FORMAL_SUIT_MALE,CASUAL_SUMMER_FEMALE,CASUAL_SUMMER_FEMALE_2, CASUAL_SUMMER_MALE,CASUAL_SPRING_MALE,JUST_DRESS);
     }
 }
