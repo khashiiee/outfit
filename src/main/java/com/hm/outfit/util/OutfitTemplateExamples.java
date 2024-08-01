@@ -9,7 +9,16 @@ import java.util.Arrays;
 
 public class OutfitTemplateExamples {
 
-    public static final OutfitTemplate DRESS_BASED = new OutfitTemplate(
+
+    public static final OutfitTemplate JUST_DRESS = new OutfitTemplate(
+            "DRESS_BASED",
+            "Dress-based Outfit",
+            Arrays.asList(ClothingCategory.DRESS),
+            Arrays.asList(ClothingCategory.ACCESSORY,  ClothingCategory.OUTERWEAR),
+            1, 5, Gender.FEMALE
+    );
+
+    public static final OutfitTemplate DRESS_N_ShOES = new OutfitTemplate(
             "DRESS_BASED",
             "Dress-based Outfit",
             Arrays.asList(ClothingCategory.DRESS,ClothingCategory.FOOTWEAR),
@@ -17,10 +26,18 @@ public class OutfitTemplateExamples {
             2, 5, Gender.FEMALE
     );
 
-    public static final OutfitTemplate JUST_DRESS = new OutfitTemplate(
+    public static final OutfitTemplate DRESS_N_JACKET = new OutfitTemplate(
             "DRESS_BASED",
             "Dress-based Outfit",
-            Arrays.asList(ClothingCategory.DRESS),
+            Arrays.asList(ClothingCategory.DRESS,ClothingCategory.JACKET),
+            Arrays.asList(ClothingCategory.ACCESSORY,  ClothingCategory.OUTERWEAR),
+            2, 5, Gender.FEMALE
+    );
+
+    public static final OutfitTemplate DRESS_N_SHOES_N_JACKET = new OutfitTemplate(
+            "DRESS_BASED",
+            "Dress-based Outfit",
+            Arrays.asList(ClothingCategory.DRESS,ClothingCategory.FOOTWEAR,ClothingCategory.OUTERWEAR),
             Arrays.asList(ClothingCategory.ACCESSORY,  ClothingCategory.OUTERWEAR),
             1, 5, Gender.FEMALE
     );
@@ -83,6 +100,6 @@ public class OutfitTemplateExamples {
     );
 
     public static List<OutfitTemplate> getAllTemplates() {
-        return Arrays.asList(DRESS_BASED, TOP_AND_BOTTOM_LADIES, TOP_AND_BOTTOM_MALE, FORMAL_SUIT_MALE,CASUAL_SUMMER_FEMALE,CASUAL_SUMMER_FEMALE_2, CASUAL_SUMMER_MALE,CASUAL_SPRING_MALE,JUST_DRESS);
+        return Arrays.asList(DRESS_N_ShOES, TOP_AND_BOTTOM_LADIES, TOP_AND_BOTTOM_MALE, FORMAL_SUIT_MALE,CASUAL_SUMMER_FEMALE,CASUAL_SUMMER_FEMALE_2, CASUAL_SUMMER_MALE,CASUAL_SPRING_MALE,JUST_DRESS,DRESS_N_SHOES_N_JACKET);
     }
 }
