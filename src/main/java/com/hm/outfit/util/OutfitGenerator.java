@@ -18,11 +18,12 @@ public class OutfitGenerator {
     private List<OutfitTemplate> templates;
 
 
-    public OutfitGenerator() {
-        this.templates = OutfitTemplateExamples.getAllTemplates();
-    }
+//    public OutfitGenerator() {
+//        this.templates = OutfitTemplateExamples.getAllTemplates();
+//    }
 
     public List<Outfit> generateOutfits(List<ClothingItem> items, Event event, User user) {
+        this.templates = OutfitTemplateExamples.getAllTemplates();
         System.out.println("Starting outfit generation for user: " + user.getName());
         this.templates = this.templates.stream()
                 .filter(template -> template.getGender() == user.getGender())
@@ -132,7 +133,7 @@ public class OutfitGenerator {
         String itemGender = item.getMainCategory().gender();
         boolean isKidsItem = itemGender.equals("kids");
         boolean isUnisexItem = itemGender.equals("unisex");
-        boolean isAdultItem = itemGender.equals("men") || itemGender.equals("ladies");
+        boolean isAdultItem = itemGender.equals("men") || itemGender.equals("ladies") || itemGender.equals("women");
 
         System.out.println("Item " + item.getName() + " is a " + itemGender + " item");
 
@@ -140,7 +141,7 @@ public class OutfitGenerator {
             return isKidsItem || isUnisexItem;
         } else {
             if (user.getGender() == Gender.FEMALE) {
-                return itemGender.equals("ladies") || isUnisexItem;
+                return itemGender.equals("ladies") || isUnisexItem || itemGender.equals("women");
             } else {
                 return itemGender.equals("men") || isUnisexItem;
             }
